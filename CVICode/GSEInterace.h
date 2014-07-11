@@ -19,12 +19,13 @@
 #define  PANEL_STOP                       3       /* control type: command, callback function: stopCallback */
 #define  PANEL_SETVOLTAGE                 4       /* control type: command, callback function: SetVoltage */
 #define  PANEL_COMMANDBUTTON_4            5       /* control type: command, callback function: (none) */
-#define  PANEL_NUMERICMETER               6       /* control type: scale, callback function: (none) */
-#define  PANEL_NUMERICMETER_2             7       /* control type: scale, callback function: (none) */
+#define  PANEL_PAC_READER                 6       /* control type: scale, callback function: (none) */
+#define  PANEL_MCP_READER                 7       /* control type: scale, callback function: (none) */
 #define  PANEL_GRAPH                      8       /* control type: graph, callback function: (none) */
 #define  PANEL_TIMER                      9       /* control type: timer, callback function: pollData */
 #define  PANEL_MCP                        10      /* control type: numeric, callback function: (none) */
 #define  PANEL_PAC                        11      /* control type: numeric, callback function: (none) */
+#define  PANEL_LED                        12      /* control type: LED, callback function: (none) */
 
 
      /* Control Arrays: */
