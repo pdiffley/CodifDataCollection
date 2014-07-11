@@ -12,8 +12,8 @@ NiFpga_Status status;
 NiFpga_Session session;
 
 //Voltage Variables
-double pacV = 0;
-double mcpV = 0;
+int16_t pacV = 0;
+int16_t mcpV = 0;
 
 int main (int argc, char *argv[])
 {
@@ -22,7 +22,11 @@ int main (int argc, char *argv[])
 	if ((panelHandle = LoadPanel (0, "GSEInterace.uir", PANEL)) < 0)
 		return -1;
 	DisplayPanel (panelHandle);
-	//SetCtrlAttribute (panelHandle, PANEL_TIMER,ATTR_ENABLED,1);
+	
+	//LED colors
+	SetCtrlAttribute (panelHandle, PANEL_LED,ATTR_OFF_COLOR,VAL_BLACK);
+	SetCtrlAttribute (panelHandle, PANEL_LED,ATTR_ON_COLOR,VAL_GREEN);
+	
 	ResetTimer (panelHandle, PANEL_TIMER);
 	RunUserInterface ();
 	DiscardPanel (panelHandle);
@@ -65,7 +69,7 @@ int tick (int panel, int control, int event, void *callbackData, int eventData1,
 		{
 			//Run the FPGA, then FIFO read *numSamples* of it, which should be set to all of it
 		 
-		 	//NiFpga_MergeStatus(&status, NiFpga_WriteI32(session, control, &numSamples)); 
+		 	 
 			 	
 		 	//NiFpga_MergeStatus(&status, NiFpga_ReadFifoI16 (session, NiFpga_FPGA_TargetToHostFifoI32_FIFO, data, numSamples, timeout,&r));
 			int test [200];
@@ -97,8 +101,7 @@ int tick (int panel, int control, int event, void *callbackData, int eventData1,
         }
 		
 					 
-	/* enable the running LED */
-    SetCtrlVal(panelHandle, PANEL_LED, running);
+
     ProcessDrawEvents();
 	
 	
@@ -122,6 +125,8 @@ int CVICALLBACK stopCallback (int panel, int control, int event,
 			}
 			
 			running = false; 
+			/* enable the running LED */
+    		SetCtrlVal(panelHandle, PANEL_LED, running);
 			
 			break;
 	}
@@ -141,8 +146,8 @@ int CVICALLBACK pollData (int panel, int control, int event,
 			{
 				tick (panel, control, event, callbackData, eventData1, eventData2);
 			}
-			SetCtrlVal (panelHandle, PANEL_PAC_READER, pacV);
-			SetCtrlVal (panelHandle, PANEL_MCP_READER, mcpV);
+			//SetCtrlVal (panelHandle, PANEL_PAC_READER, pacV);
+			//SetCtrlVal (panelHandle, PANEL_MCP_READER, mcpV);
 			break;
 	}
 	return 0;
@@ -155,12 +160,13 @@ int CVICALLBACK aquireCallback (int panel, int control, int event,
 	{
 		case EVENT_COMMIT:
 			
-			status = NiFpga_Initialize();
+			
 			uint32_t r, timeout = 10000/* 10 seconds */;
 			int16_t *data = NULL;
 			
 			if(!running)
 			{
+				status = NiFpga_Initialize();
 				//open a session
 				NiFpga_MergeStatus(&status, NiFpga_Open(NiFpga_SimpleDataCollection_Bitfile, NiFpga_SimpleDataCollection_Signature,"RIO0", NiFpga_OpenAttribute_NoRun, &session));
 			
@@ -169,6 +175,8 @@ int CVICALLBACK aquireCallback (int panel, int control, int event,
 			}
 			
 			running = true;
+			/* enable the running LED */
+    		SetCtrlVal(panelHandle, PANEL_LED, running);
 
 			break;
 		case EVENT_TIMER_TICK:
@@ -187,9 +195,25 @@ int CVICALLBACK SetVoltage (int panel, int control, int event,
 			GetCtrlVal (panelHandle, PANEL_PAC, &pacV);
 			GetCtrlVal (panelHandle, PANEL_MCP, &mcpV);
 			
-			//SetCtrlVal (panelHandle, NiFpga_SimpleDataCollection_ControlI16_MCP, mcpV);
-			//SetCtrlVal (panelHandle, NiFpga_SimpleDataCollection_ControlI16_PAC, pacV);
-		
+			
+			
+			if(!running)
+			{
+				status = NiFpga_Initialize();
+				uint32_t r, timeout = 10000/* 10 seconds */;
+				int16_t *data = NULL;
+				//open a session
+				NiFpga_MergeStatus(&status, NiFpga_Open(NiFpga_SimpleDataCollection_Bitfile, NiFpga_SimpleDataCollection_Signature,"RIO0", NiFpga_OpenAttribute_NoRun, &session));
+			
+	
+			}
+			
+			NiFpga_MergeStatus(&status, NiFpga_WriteI16(session, NiFpga_SimpleDataCollection_ControlI16_PAC, pacV));
+			NiFpga_MergeStatus(&status, NiFpga_WriteI16(session, NiFpga_SimpleDataCollection_ControlI16_MCP, mcpV));
+			
+			NiFpga_MergeStatus(&status, NiFpga_ReadI16(session, NiFpga_SimpleDataCollection_ControlI16_PAC, &pacV)); 
+			SetCtrlVal(panelHandle, PANEL_TEST, pacV);
+			
 			break;
 			
 		case EVENT_TIMER_TICK:

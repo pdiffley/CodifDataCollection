@@ -1,18 +1,18 @@
 -nologo
--out:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\SimpleDataCollection.exe
+-out:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\SimpleDataCollection.exe
 -arch:x86
 -timestamp
 -debug:2
--res:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\resources.res
+-res:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\resources.res
 -entry:_CVIWinMainStartupCodeForDebugging@0
 -base:0x400000
--linked:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\linkersummary.txt
--dlldeps:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\dlldependencies.txt
--licensing:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\linkerlicensing.txt
--browsedeps:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\moduledependencies.txt
+-linked:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\linkersummary.txt
+-dlldeps:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\dlldependencies.txt
+-licensing:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\linkerlicensing.txt
+-browsedeps:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\moduledependencies.txt
 -stackreserve:1048576
 -stackcommit:4096
--in:c:\Users\Nick\Desktop\Project\cvibuild.SimpleDataCollection\Debug\SimpleDataCollection.obj
+-in:c:\Users\Nick\Desktop\Project\CVICode\cvibuild.SimpleDataCollection\Debug\SimpleDataCollection.obj
 -more:c:\program files (x86)\national instruments\cvi2013\bin\msvc\cvistart.lib
 -more:c:\program files (x86)\national instruments\cvi2013\bin\msvc\cvi.lib
 -more:c:\program files (x86)\national instruments\cvi2013\sdk\lib\msvc\advapi32.lib

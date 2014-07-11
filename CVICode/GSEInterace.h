@@ -26,6 +26,7 @@
 #define  PANEL_MCP                        10      /* control type: numeric, callback function: (none) */
 #define  PANEL_PAC                        11      /* control type: numeric, callback function: (none) */
 #define  PANEL_LED                        12      /* control type: LED, callback function: (none) */
+#define  PANEL_TEST                       13      /* control type: numeric, callback function: (none) */
 
 
      /* Control Arrays: */

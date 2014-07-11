@@ -24,7 +24,7 @@
 /**
  * The signature of the FPGA bitfile.
  */
-static const char* const NiFpga_SimpleDataCollection_Signature = "08DECC61C6001A32AD952794C317AE25";
+static const char* const NiFpga_SimpleDataCollection_Signature = "1ABFF5364486FA50F91D105D145F6F95";
 
 typedef enum
 {
@@ -40,11 +40,5 @@ typedef enum
    NiFpga_SimpleDataCollection_IndicatorU8_CountRegister8 = 0x2E,
    NiFpga_SimpleDataCollection_IndicatorU8_CountRegister9 = 0x2A,
 } NiFpga_SimpleDataCollection_IndicatorU8;
-
-typedef enum
-{
-   NiFpga_SimpleDataCollection_ControlI16_MCP = 0x16,
-   NiFpga_SimpleDataCollection_ControlI16_PAC = 0x1A,
-} NiFpga_SimpleDataCollection_ControlI16;
 
 #endif

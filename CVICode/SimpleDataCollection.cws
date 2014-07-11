@@ -1,7 +1,6 @@
 [Workspace Header]
 Version = 1301
-Pathname Line0001 = "/c/Users/Public/Documents/National Instruments/NI-DAQ/Examples/DAQmx ANSI C/Anal"
-Pathname Line0002 = "og In/Measure Voltage/SimpleDataCollection.cws"
+Pathname = "/c/Users/Nick/Desktop/Project/CVICode/SimpleDataCollection.cws"
 CVI Dir = "/c/program files (x86)/national instruments/cvi2013"
 CVI Shared Dir = "/C/Program Files (x86)/National Instruments/Shared/CVI"
 CVI Pub Local Dir = "/C/ProgramData/National Instruments/CVI2013"
@@ -12,12 +11,12 @@ VXIplug&play Framework Dir = "/C/Program Files (x86)/IVI Foundation/VISA/winnt"
 VXIplug&play Framework 64-bit Dir = "/C/Program Files/IVI Foundation/VISA/win64"
 Number of Projects = 1
 Active Project = 1
-Project 0001 = "/c/Users/Nick/Desktop/Project/SimpleDataCollection.prj"
+Project 0001 = "SimpleDataCollection.prj"
 Drag Bar Left = 477
-Window Top = 168
-Window Left = 308
-Window Bottom = 962
-Window Right = 1653
+Window Top = 199
+Window Left = 316
+Window Bottom = 954
+Window Right = 1645
 Maximized = True
 Maximized Children = True
 Max32 Number Of Errors = 20
@@ -31,7 +30,7 @@ Save Changes Before Compiling = "Always"
 Hide Windows = False
 Break At First Statement = False
 Sort Type = "File Name"
-Number of Opened Files = 3
+Number of Opened Files = 4
 Window Confinement Region Enabled = True
 MainColumnWidth = 460
 FileDateColumnWidth = 70
@@ -47,39 +46,52 @@ Batch Build Release = False
 Batch Build Debug = False
 
 [File 0001]
-Path = "/c/Users/Nick/Desktop/Project/GSEInterace.uir"
+Path = "/c/Users/Nick/Desktop/Project/CVICode/SimpleDataCollection.c"
+File Type = "CSource"
+Disk Date = 3487957917
+In Projects = "1,"
+Window Top = 33
+Window Left = 10
+Window Z-Order = 3
+Source Window State = "1,214,214,214,51,52,52,0,0,80,0,0,0,0,0,25,167,0,218,51,349,715,1,0,"
+
+[File 0002]
+Path = "/c/Users/Nick/Desktop/Project/CVICode/NiFpga_SimpleDataCollection.h"
+File Type = "Include"
+Disk Date = 3487959469
+In Projects = "1,"
+Window Top = 95
+Window Left = 42
+Window Z-Order = 2
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,0,0,0,0,349,715,1,0,"
+
+[File 0003]
+Path = "/c/Users/Nick/Desktop/Project/CVICode/GSEInterace.uir"
 File Type = "User Interface Resource"
-Disk Date = 3487937340
+Disk Date = 3487958376
 In Projects = "1,"
 Window Top = 95
 Window Left = 42
 Window Height = 349
 Window Width = 715
-Window Z-Order = 2
-
-[File 0002]
-Path = "/c/Users/Nick/Desktop/Project/SimpleDataCollection.c"
-File Type = "CSource"
-Disk Date = 3487937549
-In Projects = "1,"
-Window Top = 126
-Window Left = 58
-Window Z-Order = 3
-Source Window State = "1,180,180,180,48,59,48,0,0,80,0,132,0,132,0,25,133,0,166,91,349,715,1,0,"
-
-[File 0003]
-Path = "/c/Users/Nick/Desktop/Project/NiFpga_SimpleDataCollection.h"
-File Type = "Include"
-Disk Date = 3487785322
-In Projects = "1,"
-Window Z-Order = 1
-Source Window State = "1,0,0,0,0,0,0,0,0,171,0,0,0,0,0,57,0,0,44,91,400,600,0,0,"
+Window Z-Order = 4
 
 [File 0004]
-Path = "/c/Users/Nick/Desktop/Project/NiFpga_SimpleDataCollection.lvbitx"
+Path = "/c/Users/Nick/Desktop/Project/CVICode/NiFpga_SimpleDataCollection.lvbitx"
 File Type = "Unknown"
-Disk Date = 3487781132
+Disk Date = 3487944293
 In Projects = "1,"
+
+[File 0005]
+Path Line0001 = "/c/Users/Nick/Desktop/Project/LabviewCode/FPGA Bitfiles/NiFpga_SimpleDataCollect"
+Path Line0002 = "ion.h"
+File Type = "Include"
+Disk Date = 3487959469
+In Projects = ""
+Window Top = 126
+Window Left = 58
+Window Z-Order = 1
+Source Window State = "1,0,0,0,0,0,0,0,0,171,0,0,0,0,0,57,0,0,42,2,349,715,1,0,"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
