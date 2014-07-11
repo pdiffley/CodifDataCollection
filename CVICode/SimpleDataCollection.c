@@ -12,8 +12,8 @@ NiFpga_Status status;
 NiFpga_Session session;
 
 //Voltage Variables
-int16_t pacV = 0;
-int16_t mcpV = 0;
+float pacV = 0;
+float mcpV = 0;
 
 int main (int argc, char *argv[])
 {
@@ -212,7 +212,7 @@ int CVICALLBACK SetVoltage (int panel, int control, int event,
 			NiFpga_MergeStatus(&status, NiFpga_WriteI16(session, NiFpga_SimpleDataCollection_ControlI16_MCP, mcpV));
 			
 			NiFpga_MergeStatus(&status, NiFpga_ReadI16(session, NiFpga_SimpleDataCollection_ControlI16_PAC, &pacV)); 
-			SetCtrlVal(panelHandle, PANEL_TEST, pacV);
+			//SetCtrlVal(panelHandle, PANEL_TEST, pacV);
 			
 			break;
 			

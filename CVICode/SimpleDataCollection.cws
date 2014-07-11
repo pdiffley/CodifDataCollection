@@ -48,21 +48,21 @@ Batch Build Debug = False
 [File 0001]
 Path = "/c/Users/Nick/Desktop/Project/CVICode/SimpleDataCollection.c"
 File Type = "CSource"
-Disk Date = 3487957917
+Disk Date = 3487960303
 In Projects = "1,"
 Window Top = 33
 Window Left = 10
-Window Z-Order = 3
-Source Window State = "1,214,214,214,51,52,52,0,0,80,0,0,0,0,0,25,167,0,218,51,349,715,1,0,"
+Window Z-Order = 1
+Source Window State = "1,15,15,15,0,7,7,0,0,171,0,0,0,0,0,57,2,0,30,4,349,715,1,0,"
 
 [File 0002]
 Path = "/c/Users/Nick/Desktop/Project/CVICode/NiFpga_SimpleDataCollection.h"
 File Type = "Include"
-Disk Date = 3487959469
+Disk Date = 3487960171
 In Projects = "1,"
 Window Top = 95
 Window Left = 42
-Window Z-Order = 2
+Window Z-Order = 3
 Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,0,0,0,0,349,715,1,0,"
 
 [File 0003]
@@ -86,12 +86,12 @@ In Projects = "1,"
 Path Line0001 = "/c/Users/Nick/Desktop/Project/LabviewCode/FPGA Bitfiles/NiFpga_SimpleDataCollect"
 Path Line0002 = "ion.h"
 File Type = "Include"
-Disk Date = 3487959469
+Disk Date = 3487960171
 In Projects = ""
 Window Top = 126
 Window Left = 58
-Window Z-Order = 1
-Source Window State = "1,0,0,0,0,0,0,0,0,171,0,0,0,0,0,57,0,0,42,2,349,715,1,0,"
+Window Z-Order = 2
+Source Window State = "1,0,0,0,0,0,0,0,0,80,0,0,0,0,0,25,0,0,42,2,349,715,1,0,"
 
 [Default Build Config 0001 Debug]
 Generate Browse Info = True
