@@ -1,0 +1,169 @@
+#include <ansi_c.h>
+#include <cvirte.h>		
+#include <userint.h>
+#include "NiFpga.h"
+#include "GSEInterace.h"
+#include "NiFpga_SimpleDataCollection.h"
+#include <stdbool.h>
+
+static int panelHandle;
+bool running = true;
+NiFpga_Status status;
+NiFpga_Session session;
+
+int main (int argc, char *argv[])
+{
+	if (InitCVIRTE (0, argv, 0) == 0)
+		return -1;	/* out of memory */
+	if ((panelHandle = LoadPanel (0, "GSEInterace.uir", PANEL)) < 0)
+		return -1;
+	DisplayPanel (panelHandle);
+	//SetCtrlAttribute (panelHandle, PANEL_TIMER,ATTR_ENABLED,1);
+	ResetTimer (panelHandle, PANEL_TIMER);
+	RunUserInterface ();
+	DiscardPanel (panelHandle);
+	return 0;
+}
+
+int CVICALLBACK panelCB (int panel, int event, void *callbackData,
+						 int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_GOT_FOCUS:
+
+			break;
+		case EVENT_LOST_FOCUS:
+
+			break;
+		case EVENT_CLOSE:
+			QuitUserInterface(0);
+			break;
+	}
+	return 0;
+}
+
+
+
+int tick (int panel, int control, int event, void *callbackData, int eventData1, int eventData2)
+{
+	//switch (event)
+	//{
+		//case EVENT_COMMIT:
+			status = NiFpga_Initialize();
+			uint32_t r, timeout = 10000/* 10 seconds */;
+			int32_t numSamples;
+			int16_t *data = NULL;
+			
+			//open a session
+			NiFpga_MergeStatus(&status, NiFpga_Open(NiFpga_SimpleDataCollection_Bitfile, NiFpga_SimpleDataCollection_Signature,"RIO0", NiFpga_OpenAttribute_NoRun, &session));
+			
+			//Run it outside the loop
+			NiFpga_MergeStatus(&status, NiFpga_Run(session, 0));
+			
+			//while (running)
+			//{
+				if (NiFpga_IsNotError(status))
+				{
+					//Run the FPGA, then FIFO read *numSamples* of it, which should be set to all of it
+				 
+				 	//NiFpga_MergeStatus(&status, NiFpga_WriteI32(session, control, &numSamples)); 
+				 	
+				 	//NiFpga_MergeStatus(&status, NiFpga_ReadFifoI16 (session, NiFpga_FPGA_TargetToHostFifoI32_FIFO, data, numSamples, timeout,&r));
+					NiFpga_MergeStatus(&status, NiFpga_WriteU8(session, NiFpga_SimpleDataCollection_IndicatorU8_CountRegister, &numSamples));                       
+					int test [200];
+					for(int i=0;i<200;i++)
+					{
+						test[i]=i;	
+					}
+					
+					numSamples = 200;
+				 
+					//if(test != NULL)
+				 	//{
+
+					//GetPanelHandleFromTabPage(panelHandle, PANEL,0,&panelHandle);
+						DeleteGraphPlot(panelHandle,PANEL_GRAPH,-1,VAL_IMMEDIATE_DRAW); 
+						PlotY(panelHandle, PANEL_GRAPH, (unsigned int*) test, numSamples,VAL_UNSIGNED_SHORT_INTEGER, VAL_THIN_LINE, VAL_EMPTY_SQUARE, VAL_SOLID, 1, VAL_RED);
+					//	RefreshGraph (panelHandle, PANEL_GRAPH);
+
+					//}
+    	         	//SetCtrlAttribute(panelHandle, TABPANEL_PANEL_ACQUIRE, ATTR_DIMMED, 1);
+  		         	
+				}
+				 /* check if anything went wrong */
+             	if (NiFpga_IsError(status))
+            	 {
+             	    char error[32];
+             	    sprintf(error, "Error %d!", status);
+                 	MessagePopup("Error", error);
+            	 }
+			//};
+			
+			NiFpga_MergeStatus(&status, NiFpga_Close(session, 0));
+
+            /* must be called after all other calls */
+            NiFpga_MergeStatus(&status, NiFpga_Finalize());
+			ProcessDrawEvents();  
+					 
+			//break;
+	//}
+	/* enable the acquire button */
+    //SetCtrlAttribute(panelHandle, TABPANEL_PANEL_ACQUIRE, ATTR_DIMMED, 0);
+    //ProcessDrawEvents();
+	
+	
+
+	return 0;
+}
+
+int CVICALLBACK stopCallback (int panel, int control, int event,
+							  void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			running = false;
+			
+			//NiFpga_MergeStatus(&status, NiFpga_Close(session, 0));
+
+            /* must be called after all other calls */
+            //NiFpga_MergeStatus(&status, NiFpga_Finalize());
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK pollData (int panel, int control, int event,
+						  void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+
+			break;
+		case EVENT_TIMER_TICK:
+			if (running)
+			{
+				tick (panel, control, event, callbackData, eventData1, eventData2);
+			}
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK aquireCallback (int panel, int control, int event,
+								void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			running = true;
+
+			break;
+		case EVENT_TIMER_TICK:
+
+			break;
+	}
+	return 0;
+}
