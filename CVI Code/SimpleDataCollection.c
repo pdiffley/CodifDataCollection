@@ -11,6 +11,10 @@ bool running = true;
 NiFpga_Status status;
 NiFpga_Session session;
 
+//Voltage Variables
+double pacV = 0;
+double mcpV = 0;
+
 int main (int argc, char *argv[])
 {
 	if (InitCVIRTE (0, argv, 0) == 0)
@@ -70,7 +74,6 @@ int tick (int panel, int control, int event, void *callbackData, int eventData1,
 				 	//NiFpga_MergeStatus(&status, NiFpga_WriteI32(session, control, &numSamples)); 
 				 	
 				 	//NiFpga_MergeStatus(&status, NiFpga_ReadFifoI16 (session, NiFpga_FPGA_TargetToHostFifoI32_FIFO, data, numSamples, timeout,&r));
-					NiFpga_MergeStatus(&status, NiFpga_WriteU8(session, NiFpga_SimpleDataCollection_IndicatorU8_CountRegister, &numSamples));                       
 					int test [200];
 					for(int i=0;i<200;i++)
 					{
@@ -161,6 +164,24 @@ int CVICALLBACK aquireCallback (int panel, int control, int event,
 			running = true;
 
 			break;
+		case EVENT_TIMER_TICK:
+
+			break;
+	}
+	return 0;
+}
+
+int CVICALLBACK SetVoltage (int panel, int control, int event,
+							void *callbackData, int eventData1, int eventData2)
+{
+	switch (event)
+	{
+		case EVENT_COMMIT:
+			GetCtrlVal (panelHandle, PANEL_PAC, &pacV);
+			GetCtrlVal (panelHandle, PANEL_MCP, &mcpV);
+
+			break;
+			
 		case EVENT_TIMER_TICK:
 
 			break;
